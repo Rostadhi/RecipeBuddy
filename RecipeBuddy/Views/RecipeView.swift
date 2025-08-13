@@ -12,6 +12,8 @@ import Kingfisher
 struct RecipeView: View {
     @StateObject private var vm: RecipeViewModel
     @Environment(\.isSearching) private var isSearching
+    @Environment(\.modelContext) private var modelContext
+    @State private var showingAdd = false
     
     init(service: Service = JSONRecipeService(),
          favorites: Favorite = PersistentData()) {
@@ -20,21 +22,85 @@ struct RecipeView: View {
     
     var body: some View {
         NavigationStack {
-            content
-                .navigationTitle("Recipes")
+            VStack(spacing: 8) {
+                controls
+                content
+            }
+            .navigationTitle("Recipes")
+            .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    showingAdd = true
+                } label: {
+                    Label("Add recipe", systemImage: "plus")
+                }
+                    .accessibilityIdentifier("addRecipeButton")
+                }
+            }
         }
         .searchable(text: $vm.query, prompt: "Search by title or ingredient")
-        .onChange(of: isSearching) { searching in
-            vm.setSearchActive(searching)
+        .onChange(of: isSearching) { newValue in
+            vm.setSearchActive(newValue)
         }
-        .task {
-            if case .idle = vm.state { vm.load() }
-        }
-        
-        .onAppear {
-            if case .idle = vm.state { vm.load() }
+        .task { if case .idle = vm.state { vm.load() } }
+        .sheet(isPresented: $showingAdd) {
+            AddRecipeView(store: RecipeStore(context: modelContext))
         }
     }
+    
+    private var controls: some View {
+        VStack(spacing: 10) {
+            // Sort and Data Source Pickers side by side
+            HStack(spacing: 12) {
+                Picker("Sort", selection: $vm.sortOrder) {
+                    Text("Time ↑").tag(RecipeViewModel.SortOrder.shortest)
+                    Text("Time ↓").tag(RecipeViewModel.SortOrder.longest)
+                }
+                .pickerStyle(.segmented)
+                Picker("Data", selection: Binding(
+                    get: { vm.dataSource == .bundled ? 0 : 1 },
+                    set: { vm.dataSource = $0 == 0 ? .bundled : .remote(remoteURL) }
+                )) {
+                    Text("Bundled").tag(0)
+                    Text("Remote").tag(1)
+                }
+                .pickerStyle(.segmented)
+            }
+            .padding(.horizontal, 4)
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 6) {
+                    ForEach(vm.allTags, id: \.self) { tag in
+                        TagChip(label: tag, selected: vm.selectedTags.contains(tag)) {
+                            if vm.selectedTags.contains(tag) {
+                                vm.selectedTags.remove(tag)
+                            } else {
+                                vm.selectedTags.insert(tag)
+                            }
+                        }
+                        .font(.caption)
+                        .padding(.vertical, 3)
+                        .padding(.horizontal, 8)
+                        .background(vm.selectedTags.contains(tag) ? Color.accentColor.opacity(0.15) : Color(.systemGray5))
+                        .foregroundColor(.primary)
+                        .clipShape(Capsule())
+                    }
+                }
+                .padding(.horizontal, 4)
+            }
+            .padding(.top, 2)
+        }
+        .padding(.vertical, 8)
+        .background(Color(.systemGray6))
+        .cornerRadius(10)
+        .padding(.horizontal)
+    }
+    
+    private var remoteURL: URL {
+        URL(string: "https://github.com/Rostadhi/RecipeBuddy/tree/1b08b627792c0fd1409a2cc9c1e4261506ed5183/RecipeBuddy/Resource/Recipe.json")!
+    }
+    
+    
     
     @ViewBuilder
     private var content: some View {

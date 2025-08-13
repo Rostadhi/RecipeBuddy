@@ -7,8 +7,13 @@
 
 import Foundation
 
+enum DataSource: Equatable {
+    case bundled
+    case remote(URL)
+}
+
 protocol Service {
-    func fetchRecipesFromJSON() async throws -> [RecipeModel]
+    func load(from source: DataSource) async throws -> [RecipeModel]
 }
 
 enum ServiceError: LocalizedError {
@@ -29,6 +34,7 @@ enum ServiceError: LocalizedError {
 }
 
 struct JSONRecipeService: Service {
+    
     let filename: String
     let bundle: Bundle
 
@@ -37,18 +43,39 @@ struct JSONRecipeService: Service {
         self.bundle = bundle
     }
 
-    func fetchRecipesFromJSON() async throws -> [RecipeModel] {
+    func load(from source: DataSource) async throws -> [RecipeModel] {
+        switch source {
+        case .bundled:
+            return try await loadBundled()
+        case .remote(let url):
+            do {
+                let (data, response) = try await URLSession.shared.data(from: url)
+                guard let http = response as? HTTPURLResponse, (200..<300).contains(http.statusCode) else {
+                    throw URLError(.badServerResponse)
+                }
+                let items = try decode(data)
+                if items.isEmpty { throw ServiceError.emptyFile(filename: filename) }
+                return items
+            } catch {
+                // graceful fallback
+                return try await loadBundled()
+            }
+        }
+    }
+
+    private func loadBundled() async throws -> [RecipeModel] {
         guard let url = bundle.url(forResource: filename, withExtension: "json") else {
             throw ServiceError.fileNotFound(filename: filename, bundle: bundle)
         }
         let data: Data = try await Task.detached(priority: .userInitiated) {
             try Data(contentsOf: url)
         }.value
+        return try decode(data)
+    }
 
+    private func decode(_ data: Data) throws -> [RecipeModel] {
         do {
-            let items = try JSONDecoder().decode([RecipeModel].self, from: data)
-            if items.isEmpty { throw ServiceError.emptyFile(filename: filename) }
-            return items
+            return try JSONDecoder().decode([RecipeModel].self, from: data)
         } catch {
             throw ServiceError.decodeFailed(underlying: error)
         }

@@ -25,3 +25,10 @@ struct IngredientModel: Codable, Equatable, Hashable {
     
     var key: String { (name ?? "") + "|" + (quantity ?? "") }
 }
+
+struct IngredientInput: Identifiable, Hashable {
+    let id = UUID()
+    var name: String = ""
+    var quantity: String = ""
+}
+

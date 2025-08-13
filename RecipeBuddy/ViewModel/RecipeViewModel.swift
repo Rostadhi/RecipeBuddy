@@ -7,16 +7,22 @@
 
 import Foundation
 import Combine
+import SwiftData
 
 @MainActor
 final class RecipeViewModel: ObservableObject {
     enum State { case idle, loading, loaded, empty, error(String) }
+    enum SortOrder: String, CaseIterable { case shortest = "Time ↑", longest = "Time ↓" }
     
     @Published var state: State = .idle
     @Published var all: [RecipeModel] = []
     @Published var filtered: [RecipeModel] = []
     @Published var query: String = ""
     @Published var hasStartedSearch: Bool = false
+    
+    @Published var sortOrder: SortOrder = .shortest { didSet { applyFilter() } }
+    @Published var selectedTags: Set<String> = [] { didSet { applyFilter() } }
+    @Published var dataSource: DataSource = .bundled { didSet { load() } }
     
     let service: Service
     let favorites: Favorite
@@ -28,17 +34,20 @@ final class RecipeViewModel: ObservableObject {
         bindSearch()
     }
     
+    var allTags: [String] {
+        Array(Set(all.flatMap(\.tags))).sorted()
+    }
+    
     func load() {
         Task {
             state = .loading
             do {
-                let items = try await service.fetchRecipesFromJSON()
+                let items = try await service.load(from: dataSource)
                 self.all = items
-                self.filtered = items
-                self.state = .loaded
+                self.state = items.isEmpty ? .empty : .loaded
+                self.applyFilter()
             } catch {
                 self.state = .error((error as? LocalizedError)?.errorDescription ?? error.localizedDescription)
-            
             }
         }
     }
@@ -56,22 +65,26 @@ final class RecipeViewModel: ObservableObject {
     }
     
     private func applyFilter() {
+        var base = all
         let q = query.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-        guard !q.isEmpty else {
-            filtered = all
-            return
+        if !q.isEmpty {
+            base = base.filter { r in
+                r.title.lowercased().contains(q) ||
+                r.ingredients.contains { ($0.name ?? "").lowercased().contains(q) }
+            }
         }
-        filtered = all.filter { r in
-            r.title.lowercased().contains(q) ||
-            r.ingredients.contains { ($0.name ?? "").lowercased().contains(q) }
+        
+        if !selectedTags.isEmpty {
+            base = base.filter { Set($0.tags).isSuperset(of: selectedTags) }
         }
-        if case .idle = state { state = .loaded } else if case .loading = state { state = .loaded }
+        
+        switch sortOrder {
+        case .shortest: filtered = base.sorted { $0.minutes < $1.minutes }
+        case .longest:  filtered = base.sorted { $0.minutes > $1.minutes }
+        }
     }
     
-    func setSearchActive(_ active: Bool) {
-        if active { hasStartedSearch = true }
-    }
-    
+    func setSearchActive(_ active: Bool) { if active { hasStartedSearch = true } }
     func isFavorite(_ id: String) -> Bool { favorites.isFavorite(id) }
     func toggleFavorite(_ id: String) { favorites.toggle(id); objectWillChange.send() }
 }
