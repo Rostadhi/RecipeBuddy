@@ -1,0 +1,60 @@
+[
+  {
+    "id": "r1",
+    "title": "Garlic Lemon Chicken",
+    "tags": ["quick", "protein"],
+    "minutes": 25,
+    "image": "https://picsum.photos/seed/r1/600/400",
+    "ingredients": [
+      { "name": "Chicken breast", "quantity": "300 g" },
+      { "name": "Garlic", "quantity": "3 cloves" },
+      { "name": "Lemon", "quantity": "1 pc" },
+      { "name": "Olive oil", "quantity": "2 tbsp" },
+      { "name": "Salt", "quantity": "to taste" },
+      { "name": "Pepper", "quantity": "to taste" }
+    ],
+    "steps": [
+      "Marinate chicken with garlic, lemon juice, salt, pepper.",
+      "Pan sear with olive oil until cooked through.",
+      "Rest 2 minutes, slice, and serve."
+    ]
+  },
+  {
+    "id": "r2",
+    "title": "Veggie Pasta Primavera",
+    "tags": ["vegetarian", "family"],
+    "minutes": 30,
+    "image": "https://picsum.photos/seed/r2/600/400",
+    "ingredients": [
+      { "name": "Pasta", "quantity": "200 g" },
+      { "name": "Broccoli", "quantity": "1 cup" },
+      { "name": "Bell pepper", "quantity": "1 pc" },
+      { "name": "Cherry tomatoes", "quantity": "10 pcs" },
+      { "name": "Parmesan", "quantity": "30 g" }
+    ],
+    "steps": [
+      "Boil pasta until al dente.",
+      "Sauté veggies lightly, season well.",
+      "Combine pasta and veggies, finish with parmesan."
+    ]
+  },
+  {
+    "id": "r3",
+    "title": "Overnight Oats",
+    "tags": ["breakfast", "quick"],
+    "minutes": 10,
+    "image": "https://picsum.photos/seed/r3/600/400",
+    "ingredients": [
+      { "name": "Rolled oats", "quantity": "1/2 cup" },
+      { "name": "Milk", "quantity": "1/2 cup" },
+      { "name": "Yogurt", "quantity": "1/4 cup" },
+      { "name": "Honey", "quantity": "1 tbsp" },
+      { "name": "Berries", "quantity": "1/3 cup" }
+    ],
+    "steps": [
+      "Mix oats, milk, yogurt, honey in a jar.",
+      "Refrigerate overnight.",
+      "Top with berries before serving."
+    ]
+  }
+]
