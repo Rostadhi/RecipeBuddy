@@ -26,7 +26,18 @@
 		C29177612E4C49F100DC2478 /* AddRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29177602E4C49F100DC2478 /* AddRecipeView.swift */; };
 		C29177632E4C669D00DC2478 /* IngredientModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29177622E4C669D00DC2478 /* IngredientModel.swift */; };
 		C29177652E4C6C6B00DC2478 /* RecipeStoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29177642E4C6C6B00DC2478 /* RecipeStoreViewModel.swift */; };
+		C2CB9DE92E4DB89F0072F37D /* RecipeBuddyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CB9DE82E4DB89F0072F37D /* RecipeBuddyTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C2CB9DEA2E4DB89F0072F37D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C29177262E4B86EF00DC2478 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C291772D2E4B86EF00DC2478;
+			remoteInfo = RecipeBuddy;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		C291772E2E4B86EF00DC2478 /* RecipeBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipeBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,6 +60,8 @@
 		C29177602E4C49F100DC2478 /* AddRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeView.swift; sourceTree = "<group>"; };
 		C29177622E4C669D00DC2478 /* IngredientModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientModel.swift; sourceTree = "<group>"; };
 		C29177642E4C6C6B00DC2478 /* RecipeStoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeStoreViewModel.swift; sourceTree = "<group>"; };
+		C2CB9DE62E4DB89F0072F37D /* RecipeBuddyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipeBuddyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2CB9DE82E4DB89F0072F37D /* RecipeBuddyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeBuddyTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +73,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C2CB9DE32E4DB89F0072F37D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -67,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				C29177302E4B86EF00DC2478 /* RecipeBuddy */,
+				C2CB9DE72E4DB89F0072F37D /* RecipeBuddyTests */,
 				C291772F2E4B86EF00DC2478 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -75,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				C291772E2E4B86EF00DC2478 /* RecipeBuddy.app */,
+				C2CB9DE62E4DB89F0072F37D /* RecipeBuddyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -153,6 +175,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		C2CB9DE72E4DB89F0072F37D /* RecipeBuddyTests */ = {
+			isa = PBXGroup;
+			children = (
+				C2CB9DE82E4DB89F0072F37D /* RecipeBuddyTests.swift */,
+			);
+			path = RecipeBuddyTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -176,6 +206,24 @@
 			productReference = C291772E2E4B86EF00DC2478 /* RecipeBuddy.app */;
 			productType = "com.apple.product-type.application";
 		};
+		C2CB9DE52E4DB89F0072F37D /* RecipeBuddyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C2CB9DEC2E4DB89F0072F37D /* Build configuration list for PBXNativeTarget "RecipeBuddyTests" */;
+			buildPhases = (
+				C2CB9DE22E4DB89F0072F37D /* Sources */,
+				C2CB9DE32E4DB89F0072F37D /* Frameworks */,
+				C2CB9DE42E4DB89F0072F37D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C2CB9DEB2E4DB89F0072F37D /* PBXTargetDependency */,
+			);
+			name = RecipeBuddyTests;
+			productName = RecipeBuddyTests;
+			productReference = C2CB9DE62E4DB89F0072F37D /* RecipeBuddyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -188,6 +236,10 @@
 				TargetAttributes = {
 					C291772D2E4B86EF00DC2478 = {
 						CreatedOnToolsVersion = 15.2;
+					};
+					C2CB9DE52E4DB89F0072F37D = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = C291772D2E4B86EF00DC2478;
 					};
 				};
 			};
@@ -208,6 +260,7 @@
 			projectRoot = "";
 			targets = (
 				C291772D2E4B86EF00DC2478 /* RecipeBuddy */,
+				C2CB9DE52E4DB89F0072F37D /* RecipeBuddyTests */,
 			);
 		};
 /* End PBXProject section */
@@ -222,6 +275,13 @@
 				C291773A2E4B86F200DC2478 /* Preview Assets.xcassets in Resources */,
 				C29177362E4B86F200DC2478 /* Assets.xcassets in Resources */,
 				C29177462E4B892C00DC2478 /* Recipe.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C2CB9DE42E4DB89F0072F37D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,7 +308,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C2CB9DE22E4DB89F0072F37D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2CB9DE92E4DB89F0072F37D /* RecipeBuddyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C2CB9DEB2E4DB89F0072F37D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C291772D2E4B86EF00DC2478 /* RecipeBuddy */;
+			targetProxy = C2CB9DEA2E4DB89F0072F37D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		C291773B2E4B86F200DC2478 /* Debug */ = {
@@ -374,7 +450,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RecipeBuddy/Preview Content\"";
-				DEVELOPMENT_TEAM = 9VK3HS3NQ2;
+				DEVELOPMENT_TEAM = D9F697SXZ6;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -384,6 +460,7 @@
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = RecipeBuddyLaunchScreen.storyboard;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -412,7 +489,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RecipeBuddy/Preview Content\"";
-				DEVELOPMENT_TEAM = 9VK3HS3NQ2;
+				DEVELOPMENT_TEAM = D9F697SXZ6;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -422,6 +499,7 @@
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = RecipeBuddyLaunchScreen.storyboard;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -438,6 +516,47 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C2CB9DED2E4DB89F0072F37D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D9F697SXZ6;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.recipe.RecipeBuddyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RecipeBuddy.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/RecipeBuddy";
+			};
+			name = Debug;
+		};
+		C2CB9DEE2E4DB89F0072F37D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D9F697SXZ6;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.recipe.RecipeBuddyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RecipeBuddy.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/RecipeBuddy";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -458,6 +577,15 @@
 			buildConfigurations = (
 				C291773E2E4B86F200DC2478 /* Debug */,
 				C291773F2E4B86F200DC2478 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C2CB9DEC2E4DB89F0072F37D /* Build configuration list for PBXNativeTarget "RecipeBuddyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C2CB9DED2E4DB89F0072F37D /* Debug */,
+				C2CB9DEE2E4DB89F0072F37D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -14,6 +14,7 @@ struct RecipeView: View {
     @Environment(\.isSearching) private var isSearching
     @Environment(\.modelContext) private var modelContext
     @State private var showingAdd = false
+    @State private var showingSettings = false
     
     init(service: Service = JSONRecipeService(),
          favorites: Favorite = PersistentData()) {
@@ -28,12 +29,19 @@ struct RecipeView: View {
             }
             .navigationTitle("Recipes")
             .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    showingAdd = true
-                } label: {
-                    Label("Add recipe", systemImage: "plus")
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        showingSettings = true
+                    }) {
+                        Image(systemName: "gearshape")
+                    }
                 }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showingAdd = true
+                    } label: {
+                        Label("Add recipe", systemImage: "plus")
+                    }
                     .accessibilityIdentifier("addRecipeButton")
                 }
             }
@@ -45,6 +53,9 @@ struct RecipeView: View {
         .task { if case .idle = vm.state { vm.load() } }
         .sheet(isPresented: $showingAdd) {
             AddRecipeView(store: RecipeStore(context: modelContext))
+        }
+        .sheet(isPresented: $showingSettings) {
+            SettingsView(vm: vm)
         }
     }
     
@@ -67,28 +78,6 @@ struct RecipeView: View {
                 .pickerStyle(.segmented)
             }
             .padding(.horizontal, 4)
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 6) {
-                    ForEach(vm.allTags, id: \.self) { tag in
-                        TagChip(label: tag, selected: vm.selectedTags.contains(tag)) {
-                            if vm.selectedTags.contains(tag) {
-                                vm.selectedTags.remove(tag)
-                            } else {
-                                vm.selectedTags.insert(tag)
-                            }
-                        }
-                        .font(.caption)
-                        .padding(.vertical, 3)
-                        .padding(.horizontal, 8)
-                        .background(vm.selectedTags.contains(tag) ? Color.accentColor.opacity(0.15) : Color(.systemGray5))
-                        .foregroundColor(.primary)
-                        .clipShape(Capsule())
-                    }
-                }
-                .padding(.horizontal, 4)
-            }
-            .padding(.top, 2)
         }
         .padding(.vertical, 8)
         .background(Color(.systemGray6))
@@ -97,7 +86,7 @@ struct RecipeView: View {
     }
     
     private var remoteURL: URL {
-        URL(string: "https://github.com/Rostadhi/RecipeBuddy/tree/1b08b627792c0fd1409a2cc9c1e4261506ed5183/RecipeBuddy/Resource/Recipe.json")!
+        URL(string: "https://raw.githubusercontent.com/Rostadhi/RecipeBuddy/1b08b627792c0fd1409a2cc9c1e4261506ed5183/RecipeBuddy/Resource/Recipe.json")!
     }
     
     
@@ -121,7 +110,7 @@ struct RecipeView: View {
                                title: "No results",
                                message: "Try a different search.")
             } else {
-                List(vm.query.isEmpty ? vm.all : vm.filtered, id: \.id) { r in
+                List(vm.filtered, id: \.id) { r in
                     NavigationLink {
                         RecipeDetailView(recipe: r, favorites: vm.favorites)
                     } label: {
@@ -146,4 +135,41 @@ struct RecipeView: View {
         }
     }
     
+}
+
+struct SettingsView: View {
+    @ObservedObject var vm: RecipeViewModel
+    @Environment(\.dismiss) private var dismiss
+    
+    var body: some View {
+        NavigationStack {
+            List(vm.allTags, id: \.self) { tag in
+                Button(action: {
+                    if vm.selectedTags.contains(tag) {
+                        vm.selectedTags.remove(tag)
+                    } else {
+                        vm.selectedTags.insert(tag)
+                    }
+                }) {
+                    HStack {
+                        Text(tag)
+                        Spacer()
+                        if vm.selectedTags.contains(tag) {
+                            Image(systemName: "checkmark")
+                                .foregroundColor(.accentColor)
+                        }
+                    }
+                }
+                .buttonStyle(PlainButtonStyle())
+            }
+            .navigationTitle("Settings")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Done") {
+                        dismiss()
+                    }
+                }
+            }
+        }
+    }
 }

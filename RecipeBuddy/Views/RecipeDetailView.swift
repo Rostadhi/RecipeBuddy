@@ -75,6 +75,25 @@ struct RecipeDetailView: View {
             .padding(16)
         }
         .navigationTitle("Recipe")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: shareRecipe) {
+                    Image(systemName: "square.and.arrow.up")
+                }
+            }
+        }
         .onAppear { isFav = favorites.isFavorite(recipe.id) }
+    }
+    
+    private func shareRecipe() {
+        var items: [Any] = ["I found this recipe: \(recipe.title)"]
+        if let url = recipe.imageURL {
+            items.append(url)
+        }
+        let avc = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let rootVC = scene.windows.first?.rootViewController {
+            rootVC.present(avc, animated: true)
+        }
     }
 }
