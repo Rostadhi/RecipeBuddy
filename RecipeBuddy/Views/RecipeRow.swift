@@ -10,20 +10,19 @@ import SwiftUI
 import Kingfisher
 
 struct RecipeRow: View {
-    let recipe: RecipeModel
+    let recipe: RecipeEntity
     let isFavorite: Bool
     let onFavorite: () -> Void
 
     var body: some View {
         HStack(spacing: 12) {
-            KFImage(recipe.imageURL)
-                .placeholder { ProgressView() }
-                .cancelOnDisappear(true)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 72, height: 72)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-
+            if let data = recipe.imageData, let uiImage = UIImage(data: data) {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 72, height: 72)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                        }
             VStack(alignment: .leading, spacing: 6) {
                 HStack {
                     Text(recipe.title).font(.headline).lineLimit(1)

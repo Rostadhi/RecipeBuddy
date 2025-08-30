@@ -12,7 +12,6 @@
 		C291773A2E4B86F200DC2478 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C29177392E4B86F200DC2478 /* Preview Assets.xcassets */; };
 		C29177422E4B88F700DC2478 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = C29177412E4B88F700DC2478 /* Kingfisher */; };
 		C29177442E4B891F00DC2478 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C29177432E4B891F00DC2478 /* README.md */; };
-		C29177462E4B892C00DC2478 /* Recipe.json in Resources */ = {isa = PBXBuildFile; fileRef = C29177452E4B892C00DC2478 /* Recipe.json */; };
 		C291774D2E4B8B1000DC2478 /* RecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C291774C2E4B8B1000DC2478 /* RecipeModel.swift */; };
 		C291774F2E4B8B3A00DC2478 /* JSONRecipeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C291774E2E4B8B3A00DC2478 /* JSONRecipeService.swift */; };
 		C29177512E4B8B6800DC2478 /* PersistentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29177502E4B8B6800DC2478 /* PersistentData.swift */; };
@@ -46,7 +45,6 @@
 		C29177372E4B86F200DC2478 /* RecipeBuddy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RecipeBuddy.entitlements; sourceTree = "<group>"; };
 		C29177392E4B86F200DC2478 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C29177432E4B891F00DC2478 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		C29177452E4B892C00DC2478 /* Recipe.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Recipe.json; sourceTree = "<group>"; };
 		C291774C2E4B8B1000DC2478 /* RecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeModel.swift; sourceTree = "<group>"; };
 		C291774E2E4B8B3A00DC2478 /* JSONRecipeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONRecipeService.swift; sourceTree = "<group>"; };
 		C29177502E4B8B6800DC2478 /* PersistentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentData.swift; sourceTree = "<group>"; };
@@ -130,7 +128,6 @@
 		C29177472E4B8A6800DC2478 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				C29177452E4B892C00DC2478 /* Recipe.json */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -274,7 +271,6 @@
 				C291775D2E4C34AF00DC2478 /* RecipeBuddyLaunchScreen.storyboard in Resources */,
 				C291773A2E4B86F200DC2478 /* Preview Assets.xcassets in Resources */,
 				C29177362E4B86F200DC2478 /* Assets.xcassets in Resources */,
-				C29177462E4B892C00DC2478 /* Recipe.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,6 +450,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -493,6 +492,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
